@@ -1,0 +1,131 @@
+import './signup.css';
+import { useState } from 'react';
+import Footer from '../footer/footer.jsx'
+import dataTenant from '../../assents/data/setData_tenant.json'
+
+
+function Signup() {
+  const [name, setName] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [email, setEmail] = useState('')
+  const [date, setDate] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [dni, setDni] = useState('')
+  const [password, setPassword] = useState('')
+  const [person, setPerson] = useState([])
+
+  const dataRegister = dataTenant.map((element) => ({
+    id: element.id,
+    nombre: element.nombre,
+    email: element.email,
+    telefono: element.telefono,
+    tipo: element.tipo
+  }))
+
+  const handleSumbit = (event) =>{
+      event.preventDefault();
+
+      let newPerson = {
+          name,
+          lastname,
+          email,
+          password,
+          phoneNumber,
+          date
+      }
+
+      setPerson([...person, newPerson]);
+
+      setName('');
+      setLastname('');
+      setEmail('');
+      setPassword('');
+      setPhoneNumber('');
+      setDate('');
+
+      console.log(newPerson)
+  }
+    return (
+      <div>
+        <main>
+            <div className='container'>
+                <div className='container-1'>
+
+                </div>
+                <div className='container-2'>
+                <header>Register</header>
+                <form className="form" onSubmit={handleSumbit}>
+                    <div className="input-box">
+                        <label>Nombre</label>
+                        <input 
+                        type="text"
+                        id="name"
+                        value={name}
+                        onChange={(event) => setName(event.target.value)} 
+                        placeholder="Ingrese Nombre" required/>
+                    </div>
+                    <div className="input-box">
+                        <label>Apellido</label>
+                        <input 
+                        type="text"
+                        id="lastname"
+                        value={lastname}
+                        onChange={(event) => setLastname(event.target.value)}  
+                        placeholder="Ingrese Apellido" required/>
+                    </div>
+                    <div className="input-box">
+                        <label>Email</label>
+                        <input 
+                        type="text"
+                        id="email"
+                        value={email} 
+                        onChange={(event) => setEmail(event.target.value)} 
+                        placeholder="Ingrese Email" required/>
+                    </div>
+                    <div className="input-box">
+                        <label>Email</label>
+                        <input 
+                        type="password"
+                        id="password"
+                        value={password} 
+                        onChange={(event) => setPassword(event.target.value)} 
+                        placeholder="Ingrese Contraseña" required/>
+                    </div>
+                    <div className="input-box">
+                        <label>Fecha de Nacimiento</label>
+                        <input 
+                        type="date"
+                        id="date"
+                        value={date} 
+                        onChange={(event) => setDate(event.target.value)} 
+                        placeholder="Ingrese Fecha de Nacimiento" required/>
+                    </div>
+                    <div className="input-box">
+                        <label>Numero de Telefono</label>
+                        <input 
+                        type="number"
+                        id="phoneNumber"
+                        value={phoneNumber} 
+                        onChange={(event) => setPhoneNumber(event.target.value)} 
+                        placeholder="Ingrese Numero de Telefono" required/>
+                    </div>
+                    <div className="input-box">
+                        <label>DNI</label>
+                        <input 
+                        type="number"
+                        id="dni"
+                        value={dni} 
+                        onChange={(event) => setDni(event.target.value)} 
+                        placeholder="Ingrese DNI" required/>
+                    </div>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+            </div>
+        </main>
+        <Footer/>  
+      </div>
+    );
+  }
+  
+  export default Signup;
